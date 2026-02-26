@@ -1,12 +1,16 @@
-import { auth } from "@/lib/auth"
+import NextAuth from "next-auth"
 import { NextResponse } from "next/server"
 import type { NextRequest } from "next/server"
+import { authConfig } from "@/lib/auth.config"
 
-const ADMIN_PATH_PREFIX = "/admin"
+// Use the Edge-safe config — no Prisma, no bcrypt.
+// JWT verification is stateless and runs fine on the Edge Runtime.
+const { auth } = NextAuth(authConfig)
+
 const ADMIN_API_METHODS = ["POST", "PATCH", "PUT", "DELETE"]
 
 function isAdminPage(pathname: string): boolean {
-  return pathname.startsWith(ADMIN_PATH_PREFIX) && pathname !== "/admin/login"
+  return pathname.startsWith("/admin") && pathname !== "/admin/login"
 }
 
 function isWriteApiRoute(pathname: string, method: string): boolean {
