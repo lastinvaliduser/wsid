@@ -1,0 +1,63 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Category {
+  CODING
+  GUITAR
+  PHOTOGRAPHY
+  MOTORBIKES
+}
+
+enum PostStatus {
+  DRAFT
+  PUBLISHED
+}
+
+model Post {
+  id          String     @id @default(cuid())
+  title       String
+  slug        String     @unique
+  excerpt     String?
+  content     String     @db.Text
+  category    Category
+  status      PostStatus @default(DRAFT)
+  coverImage  String?
+  tags        String[]
+  seoTitle    String?
+  seoDesc     String?
+  publishedAt DateTime?
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  @@index([category, status, publishedAt(sort: Desc)])
+  @@index([status, publishedAt(sort: Desc)])
+}
+
+model Media {
+  id        String   @id @default(cuid())
+  filename  String
+  url       String
+  mimeType  String
+  size      Int
+  createdAt DateTime @default(now())
+
+  @@index([createdAt(sort: Desc)])
+}
+
+model Setting {
+  key   String @id
+  value String @db.Text
+}
+
+model AdminAccount {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
