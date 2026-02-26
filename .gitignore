@@ -51,3 +51,4 @@ next-env.d.ts
 # vitest
 /coverage
 .env.local.example
+.env*.local
