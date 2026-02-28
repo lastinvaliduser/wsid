@@ -1,14 +1,21 @@
 import type { Metadata } from "next"
-import { Geist, Geist_Mono } from "next/font/google"
-import { ColorSchemeScript, MantineProvider } from "@mantine/core"
+import { Lora, Geist_Mono } from "next/font/google"
+import { ColorSchemeScript, MantineProvider, createTheme } from "@mantine/core"
 import { Notifications } from "@mantine/notifications"
+import { SpotlightSearch } from "@/components/public/SpotlightSearch"
 import "@mantine/core/styles.css"
 import "@mantine/notifications/styles.css"
 import "@mantine/tiptap/styles.css"
 import "./globals.css"
 
-const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] })
+const lora = Lora({ variable: "--font-lora", subsets: ["latin"] })
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] })
+
+const theme = createTheme({
+  fontFamily: 'var(--font-lora), serif',
+  headings: { fontFamily: 'var(--font-lora), serif' },
+  primaryColor: 'gray',
+})
 
 export const metadata: Metadata = {
   title: {
@@ -38,11 +45,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <ColorSchemeScript />
+        <ColorSchemeScript defaultColorScheme="light" />
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <MantineProvider>
+      <body className={`${lora.variable} ${geistMono.variable} antialiased font-sans`}>
+        <MantineProvider theme={theme} defaultColorScheme="light">
           <Notifications position="top-right" />
+          <SpotlightSearch />
           {children}
         </MantineProvider>
       </body>

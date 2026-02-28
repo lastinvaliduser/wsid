@@ -48,6 +48,7 @@ export const PostQuerySchema = z.object({
   status: PostStatusSchema.optional().default("PUBLISHED"),
   page: z.coerce.number().int().positive().default(1),
   limit: z.coerce.number().int().positive().max(50).default(10),
+  search: z.string().optional(),
 })
 
 // ─── Auth schemas ─────────────────────────────────────────────────────────────

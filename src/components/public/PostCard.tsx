@@ -14,12 +14,7 @@ interface PostCardProps {
   compact?: boolean
 }
 
-const CATEGORY_ACCENT: Record<Category, string> = {
-  CODING: "bg-blue-100 text-blue-700",
-  GUITAR: "bg-purple-100 text-purple-700",
-  PHOTOGRAPHY: "bg-amber-100 text-amber-700",
-  MOTORBIKES: "bg-red-100 text-red-700",
-}
+
 
 export function PostCard({
   title,
@@ -34,10 +29,10 @@ export function PostCard({
   const href = `/${categoryToUrlSegment(category)}/${slug}`
   const formattedDate = publishedAt
     ? new Date(publishedAt).toLocaleDateString("en-US", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      })
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    })
     : null
 
   return (
@@ -55,7 +50,7 @@ export function PostCard({
       )}
       <div className="flex items-center gap-2">
         <span
-          className={`text-xs font-medium px-2 py-0.5 rounded-full ${CATEGORY_ACCENT[category]}`}
+          className="text-xs font-medium px-2 py-0.5 rounded-full border border-gray-200 bg-gray-50 text-gray-800 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200"
         >
           {CATEGORY_LABELS[category]}
         </span>
@@ -66,9 +61,8 @@ export function PostCard({
       </div>
       <Link href={href} className="block group/link">
         <h2
-          className={`font-semibold text-gray-900 group-hover/link:text-gray-600 transition-colors ${
-            compact ? "text-base" : "text-xl"
-          }`}
+          className={`font-semibold text-gray-900 dark:text-gray-100 group-hover/link:text-gray-600 dark:group-hover/link:text-gray-400 transition-colors ${compact ? "text-base" : "text-xl"
+            }`}
         >
           {title}
         </h2>

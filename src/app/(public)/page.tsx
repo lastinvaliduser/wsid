@@ -1,17 +1,12 @@
 import { prisma } from "@/lib/prisma"
-import { CategoryCard } from "@/components/public/CategoryCard"
 import { PostCard } from "@/components/public/PostCard"
+import { CATEGORY_LABELS, categoryToUrlSegment } from "@/lib/category"
+import Link from "next/link"
 import readingTime from "reading-time"
 import type { Category } from "@prisma/client"
 
 export const revalidate = 3600
 
-const CATEGORY_DESCRIPTIONS: Record<Category, string> = {
-  CODING: "Software engineering, web development, and things I build.",
-  GUITAR: "Learning, playing, and living through music.",
-  PHOTOGRAPHY: "Moments captured through a lens.",
-  MOTORBIKES: "Roads taken, rides remembered.",
-}
 
 export default async function LandingPage() {
   const [categoryCounts, recentPosts] = await Promise.all([
@@ -37,9 +32,6 @@ export default async function LandingPage() {
     }),
   ])
 
-  const countByCategory = Object.fromEntries(
-    categoryCounts.map((g) => [g.category, g._count._all])
-  ) as Record<Category, number>
 
   const categories: Category[] = ["CODING", "GUITAR", "PHOTOGRAPHY", "MOTORBIKES"]
 
@@ -55,20 +47,24 @@ export default async function LandingPage() {
         </p>
       </section>
 
-      {/* Category grid */}
-      <section className="max-w-5xl mx-auto px-4 pb-20">
-        <h2 className="text-sm font-semibold text-gray-400 uppercase tracking-widest mb-6">
-          Explore
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {categories.map((cat) => (
-            <CategoryCard
-              key={cat}
-              category={cat}
-              description={CATEGORY_DESCRIPTIONS[cat]}
-              postCount={countByCategory[cat] ?? 0}
-            />
-          ))}
+      {/* Category Grid */}
+      <section className="max-w-5xl mx-auto px-4 pb-24 pt-10">
+        <h2 className="sr-only">Explore Categories</h2>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+          {categories.map((cat) => {
+            const href = `/${categoryToUrlSegment(cat)}`
+            return (
+              <Link
+                key={cat}
+                href={href}
+                className="group flex flex-col items-center justify-center aspect-[4/3] sm:aspect-square border border-gray-200 dark:border-gray-800 rounded-2xl p-6 transition-all hover:bg-gray-50 dark:hover:bg-gray-900 hover:scale-[1.02]"
+              >
+                <h3 className="font-semibold text-gray-900 dark:text-gray-100 text-lg sm:text-xl tracking-widest uppercase group-hover:text-gray-600 dark:group-hover:text-gray-500 transition-colors">
+                  {CATEGORY_LABELS[cat]}
+                </h3>
+              </Link>
+            )
+          })}
         </div>
       </section>
 

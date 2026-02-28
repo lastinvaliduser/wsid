@@ -2,6 +2,7 @@ import { NextResponse } from "next/server"
 import { revalidatePath } from "next/cache"
 import { auth } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
+import { Prisma } from "@prisma/client"
 import { CreatePostSchema, PostQuerySchema } from "@/lib/validations"
 import { generateSlug, appendSuffix } from "@/lib/slug"
 import { categoryToUrlSegment } from "@/lib/category"
@@ -17,7 +18,7 @@ export async function GET(request: Request) {
     )
   }
 
-  const { category, status, page, limit } = queryResult.data
+  const { category, status, page, limit, search } = queryResult.data
   const session = await auth()
 
   // DRAFT posts require authentication
@@ -25,9 +26,15 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
   }
 
-  const where = {
+  const where: Prisma.PostWhereInput = {
     ...(category && { category }),
     status,
+    ...(search && {
+      OR: [
+        { title: { contains: search, mode: "insensitive" } },
+        { content: { contains: search, mode: "insensitive" } },
+      ],
+    }),
   }
 
   const [posts, total] = await Promise.all([
