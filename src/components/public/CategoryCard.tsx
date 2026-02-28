@@ -16,13 +16,23 @@ export function CategoryCard({ category, description, postCount }: CategoryCardP
   return (
     <Link
       href={href}
-      className="block border rounded-xl p-6 transition-colors hover:bg-gray-50 dark:hover:bg-gray-900 border-gray-200 dark:border-gray-800"
+      className="block p-4 sm:p-6 transition-all hover:scale-[1.01] overflow-hidden"
+      style={{
+        border: "var(--border)",
+        borderRadius: "var(--radius)",
+        boxShadow: "var(--shadow)",
+        fontFamily: "var(--font-main)",
+        backgroundColor: "var(--background)",
+      }}
     >
-      <h3 className="font-semibold text-gray-900 dark:text-gray-100 text-lg mb-1">
+      <h3
+        className="font-bold text-lg mb-1"
+        style={{ color: 'var(--foreground)' }}
+      >
         {CATEGORY_LABELS[category]}
       </h3>
-      <p className="text-sm text-gray-500 mb-3">{description}</p>
-      <span className="text-xs text-gray-400">{postCount} posts</span>
+      <p className="text-sm opacity-70 mb-3" style={{ color: 'var(--foreground)' }}>{description}</p>
+      <span className="text-xs opacity-50" style={{ color: 'var(--foreground)' }}>{postCount} posts</span>
     </Link>
   )
 }

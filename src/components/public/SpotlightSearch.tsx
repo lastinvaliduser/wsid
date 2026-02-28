@@ -28,7 +28,7 @@ export function SpotlightSearch() {
 
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
-            if ((e.metaKey || e.ctrlKey) && e.key === "f") {
+            if ((e.metaKey || e.ctrlKey) && e.shiftKey && e.key.toLowerCase() === "f") {
                 e.preventDefault()
                 setOpened((o) => {
                     if (!o) {
@@ -90,7 +90,9 @@ export function SpotlightSearch() {
                 content: {
                     backgroundColor: "var(--background)",
                     color: "var(--foreground)",
-                    border: "1px solid var(--mantine-color-gray-2)",
+                    border: "var(--border)",
+                    borderRadius: "var(--radius)",
+                    fontFamily: "var(--font-main)",
                 }
             }}
         >
@@ -108,6 +110,7 @@ export function SpotlightSearch() {
                     input: {
                         fontSize: "1.2rem",
                         color: "var(--foreground)",
+                        fontFamily: "var(--font-main)",
                     }
                 }}
             />

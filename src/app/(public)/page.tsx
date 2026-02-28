@@ -47,9 +47,18 @@ export default async function LandingPage() {
     <>
       {/* Hero */}
       <section className="max-w-5xl mx-auto px-4 pt-12 pb-8 text-center">
-        <h1 className="text-4xl font-bold text-gray-900 leading-tight tracking-tight">
+        <h1
+          className="text-5xl md:text-6xl font-black leading-tight tracking-tight mb-4"
+          style={{ color: 'var(--foreground)', fontFamily: 'var(--font-main)', textShadow: 'var(--shadow)' }}
+        >
           What Should I Do Now?
         </h1>
+        <p
+          className="mt-2 text-[10px] uppercase tracking-[0.2em] opacity-60"
+          style={{ fontFamily: "var(--font-main)" }}
+        >
+          Press <kbd className="px-1.5 py-0.5 rounded border" style={{ border: "var(--border)", backgroundColor: "var(--background)" }}>Cmd</kbd> + <kbd className="px-1.5 py-0.5 rounded border" style={{ border: "var(--border)", backgroundColor: "var(--background)" }}>Shift</kbd> + <kbd className="px-1.5 py-0.5 rounded border" style={{ border: "var(--border)", backgroundColor: "var(--background)" }}>F</kbd> to search
+        </p>
         <p className="mt-4 text-lg text-gray-500 max-w-xl mx-auto">
           Thoughts, stories, and learnings from life — coding, music, photography, and riding.
         </p>
@@ -58,24 +67,33 @@ export default async function LandingPage() {
       {/* Category Grid */}
       <section className="max-w-5xl mx-auto px-4 pb-16 pt-4">
         <h2 className="sr-only">Explore Categories</h2>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6">
           {categories.map((cat) => {
             const href = `/${categoryToUrlSegment(cat)}`
             return (
               <Link
                 key={cat}
                 href={href}
-                className="group relative flex flex-col items-center justify-center aspect-[4/3] sm:aspect-square border border-gray-200 dark:border-gray-800 rounded-2xl p-6 transition-all hover:scale-[1.02] overflow-hidden bg-white dark:bg-gray-900"
+                className="group relative flex flex-col items-center justify-center aspect-square border p-4 sm:p-6 transition-all hover:scale-[1.02] overflow-hidden"
+                style={{
+                  backgroundColor: 'var(--background)',
+                  border: 'var(--border)',
+                  borderRadius: 'var(--radius)',
+                  fontFamily: 'var(--font-main)',
+                }}
               >
                 {/* Background Image on Hover */}
                 <Image
                   src={CATEGORY_IMAGES[cat]}
                   alt={CATEGORY_LABELS[cat]}
                   fill
-                  className="object-cover opacity-0 group-hover:opacity-40 transition-opacity duration-500 z-0"
+                  className="object-cover opacity-0 group-hover:opacity-20 transition-opacity duration-500 z-0"
                 />
 
-                <h3 className="relative z-10 font-semibold text-gray-900 dark:text-gray-100 text-lg sm:text-xl tracking-widest uppercase group-hover:text-gray-950 dark:group-hover:text-white transition-colors drop-shadow-sm">
+                <h3
+                  className="relative z-10 font-black text-lg sm:text-xl tracking-widest uppercase transition-colors"
+                  style={{ color: 'var(--foreground)', textShadow: 'var(--shadow)' }}
+                >
                   {CATEGORY_LABELS[cat]}
                 </h3>
               </Link>
@@ -87,7 +105,10 @@ export default async function LandingPage() {
       {/* Recent posts */}
       {recentPosts.length > 0 && (
         <section className="max-w-5xl mx-auto px-4 pb-20">
-          <h2 className="text-sm font-semibold text-gray-400 uppercase tracking-widest mb-8">
+          <h2
+            className="text-sm font-semibold uppercase tracking-widest mb-8 opacity-50"
+            style={{ color: 'var(--foreground)', fontFamily: 'var(--font-main)' }}
+          >
             Recent Posts
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">

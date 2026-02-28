@@ -3,25 +3,123 @@
 
 @custom-variant dark (&:where([data-mantine-color-scheme="dark"], [data-mantine-color-scheme="dark"] *));
 
-:root {
+:root[data-theme="light"] {
   --background: #ffffff;
-  --foreground: #171717;
+  --background-rgb: 255, 255, 255;
+  --foreground: #1a1a1a;
+  --foreground-rgb: 26, 26, 26;
+  --primary: #1a1a1a;
+  --accent: #f5f5f5;
+  --font-main: var(--font-lora), serif;
+  --radius: 1rem;
+  --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  --border: 1px solid #e5e7eb;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-lora), serif;
-  --font-mono: var(--font-geist-mono);
-}
-
-:root[data-mantine-color-scheme="dark"] {
+:root[data-theme="dark"] {
   --background: #0a0a0a;
+  --background-rgb: 10, 10, 10;
   --foreground: #ededed;
+  --foreground-rgb: 237, 237, 237;
+  --primary: #ededed;
+  --accent: #1a1a1a;
+  --font-main: var(--font-lora), serif;
+  --radius: 1rem;
+  --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.5);
+  --border: 1px solid #262626;
+}
+
+:root[data-theme="cyberpunk"] {
+  --background: #000000;
+  --background-rgb: 0, 0, 0;
+  --foreground: #f3f303;
+  --foreground-rgb: 243, 243, 3;
+  --primary: #f3f303;
+  --accent: #ff00ff;
+  --font-main: var(--font-orbitron), sans-serif;
+  --radius: 0;
+  --shadow: 5px 5px 0px #ff00ff;
+  --border: 2px solid #f3f303;
+  background-image: radial-gradient(circle at 50% 50%, #1a1100 0%, #000000 100%);
+  text-transform: uppercase;
+}
+
+:root[data-theme="matrix"] {
+  --background: #000000;
+  --background-rgb: 0, 0, 0;
+  --foreground: #00ff41;
+  --foreground-rgb: 0, 255, 65;
+  --primary: #00ff41;
+  --accent: #003b00;
+  --font-main: var(--font-vt323), monospace;
+  --radius: 0;
+  --shadow: 0 0 5px #00ff41;
+  --border: 1px solid #00ff41;
+  background-image:
+    linear-gradient(rgba(0, 255, 65, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 65, 0.05) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+:root[data-theme="gameboy"] {
+  --background: #9bbc0f;
+  --background-rgb: 155, 188, 15;
+  --foreground: #0f380f;
+  --foreground-rgb: 15, 56, 15;
+  --primary: #0f380f;
+  --accent: #8bac0f;
+  --font-main: var(--font-press-start), cursive;
+  --radius: 0;
+  --shadow: 4px 4px 0px #0f380f;
+  --border: 4px solid #0f380f;
+  background-image: linear-gradient(rgba(15, 56, 15, 0.05) 2px, transparent 2px);
+  background-size: 100% 4px;
+}
+
+:root[data-theme="retro"] {
+  --background: #1a0f00;
+  --background-rgb: 26, 15, 0;
+  --foreground: #ffb000;
+  --foreground-rgb: 255, 176, 0;
+  --primary: #ffb000;
+  --accent: #331a00;
+  --font-main: var(--font-space-mono), monospace;
+  --radius: 0;
+  --border: 2px solid #ffb000;
+  --shadow: 0 0 15px rgba(255, 176, 0, 0.4);
+}
+
+:root[data-theme="arch"] {
+  --background: #17191e;
+  --background-rgb: 23, 25, 30;
+  --foreground: #c5c8c6;
+  --foreground-rgb: 197, 200, 198;
+  --primary: #1793d1;
+  --accent: #1d1f21;
+  --font-main: var(--font-geist-mono), monospace;
+  --radius: 0;
+  --border: 1px solid #373b41;
+  --shadow: none;
+}
+
+:root[data-theme="dracula"] {
+  --background: #282a36;
+  --background-rgb: 40, 42, 54;
+  --foreground: #f8f8f2;
+  --foreground-rgb: 248, 248, 242;
+  --primary: #bd93f9;
+  --accent: #ff79c6;
+  --font-main: var(--font-lora), serif;
+  --radius: 0.75rem;
+  --border: 1px solid #44475a;
+  --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans);
+  font-family: var(--font-main) !important;
+  transition: background 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  min-height: 100vh;
+  background-attachment: fixed;
 }

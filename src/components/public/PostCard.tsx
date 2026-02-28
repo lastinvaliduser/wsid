@@ -36,9 +36,18 @@ export function PostCard({
     : null
 
   return (
-    <article className="group flex flex-col gap-3">
+    <article
+      className="group flex flex-col gap-3 p-4 transition-all hover:scale-[1.01]"
+      style={{
+        border: "var(--border)",
+        borderRadius: "var(--radius)",
+        boxShadow: "var(--shadow)",
+        fontFamily: "var(--font-main)",
+        backgroundColor: "var(--background)",
+      }}
+    >
       {!compact && coverImage && (
-        <Link href={href} className="overflow-hidden rounded-lg">
+        <Link href={href} className="overflow-hidden" style={{ borderRadius: "calc(var(--radius) / 2)" }}>
           <Image
             src={coverImage}
             alt={title}
@@ -50,24 +59,31 @@ export function PostCard({
       )}
       <div className="flex items-center gap-2">
         <span
-          className="text-xs font-medium px-2 py-0.5 rounded-full border border-gray-200 bg-gray-50 text-gray-800 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200"
+          className="text-[10px] uppercase font-bold px-2 py-0.5"
+          style={{
+            border: "var(--border)",
+            borderRadius: "var(--radius)",
+            backgroundColor: "var(--foreground)",
+            color: "var(--background)",
+            fontFamily: "var(--font-main)",
+          }}
         >
           {CATEGORY_LABELS[category]}
         </span>
         {formattedDate && (
-          <span className="text-xs text-gray-400">{formattedDate}</span>
+          <span className="text-[10px] opacity-60 font-mono" style={{ color: "var(--foreground)", fontFamily: "var(--font-main)" }}>{formattedDate}</span>
         )}
-        <span className="text-xs text-gray-400">{readingTimeMinutes} min read</span>
       </div>
       <Link href={href} className="block group/link">
         <h2
-          className={`font-semibold text-gray-900 dark:text-gray-100 group-hover/link:text-gray-600 dark:group-hover/link:text-gray-400 transition-colors ${compact ? "text-base" : "text-xl"
+          className={`font-bold text-gray-900 dark:text-gray-100 transition-colors ${compact ? "text-sm" : "text-lg"
             }`}
+          style={{ fontFamily: 'var(--font-main)', color: 'var(--foreground)' }}
         >
           {title}
         </h2>
         {!compact && excerpt && (
-          <p className="mt-1 text-sm text-gray-500 line-clamp-2">{excerpt}</p>
+          <p className="mt-1 text-sm opacity-70 line-clamp-2" style={{ color: 'var(--foreground)', fontFamily: 'var(--font-main)' }}>{excerpt}</p>
         )}
       </Link>
     </article>
