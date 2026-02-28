@@ -109,10 +109,11 @@ export default async function PostPage({ params }: PageProps) {
       />
       <ScrollProgress />
 
-      <article className="max-w-2xl mx-auto px-4 py-12">
+      <article className="max-w-2xl mx-auto px-4 pt-4 md:pt-12 pb-12">
         <Link
           href="/"
-          className="inline-flex items-center text-sm text-gray-500 hover:text-gray-900 transition-colors mb-8"
+          className="inline-flex items-center text-sm transition-colors mb-8 opacity-60 hover:opacity-100"
+          style={{ color: 'var(--foreground)', fontFamily: 'var(--font-main)' }}
         >
           <span className="mr-2">←</span> Back to Home
         </Link>
@@ -120,25 +121,34 @@ export default async function PostPage({ params }: PageProps) {
         {/* Post header */}
         <header className="mb-8">
           <div className="flex items-center gap-2 mb-4">
-            <span className="text-sm font-medium text-gray-500">
+            <span className="text-sm font-medium opacity-60" style={{ color: 'var(--foreground)', fontFamily: 'var(--font-main)' }}>
               {CATEGORY_LABELS[post.category]}
             </span>
-            <span className="text-gray-300">·</span>
+            <span className="opacity-30" style={{ color: 'var(--foreground)' }}>·</span>
             {formattedDate && (
-              <time className="text-sm text-gray-500" dateTime={post.publishedAt?.toISOString()}>
+              <time
+                className="text-sm opacity-60"
+                dateTime={post.publishedAt?.toISOString()}
+                style={{ color: 'var(--foreground)', fontFamily: 'var(--font-main)' }}
+              >
                 {formattedDate}
               </time>
             )}
-            <span className="text-gray-300">·</span>
-            <span className="text-sm text-gray-500">
+            <span className="opacity-30" style={{ color: 'var(--foreground)' }}>·</span>
+            <span className="text-sm opacity-60" style={{ color: 'var(--foreground)', fontFamily: 'var(--font-main)' }}>
               {Math.ceil(readingStats.minutes)} min read
             </span>
           </div>
-          <h1 className="text-4xl font-bold text-gray-900 leading-tight tracking-tight">
+          <h1
+            className="text-4xl md:text-5xl font-black leading-tight tracking-tight"
+            style={{ color: 'var(--foreground)', fontFamily: 'var(--font-main)', textShadow: 'var(--shadow)' }}
+          >
             {post.title}
           </h1>
           {post.excerpt && (
-            <p className="mt-3 text-xl text-gray-500">{post.excerpt}</p>
+            <p className="mt-3 text-xl opacity-70" style={{ color: 'var(--foreground)', fontFamily: 'var(--font-main)' }}>
+              {post.excerpt}
+            </p>
           )}
         </header>
 

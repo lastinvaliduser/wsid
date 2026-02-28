@@ -1,19 +1,43 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+/**
+ * CUSTOM VARIANTS
+ * --------------------------------------------------------------------------
+ * dark: Generic dark mode variant for Mantine/Tailwind compatibility
+ */
 @custom-variant dark (&:where([data-mantine-color-scheme="dark"], [data-mantine-color-scheme="dark"] *));
+
+/**
+ * THEME SYSTEM ARCHITECTURE
+ * --------------------------------------------------------------------------
+ * Every theme defines a set of variables that control:
+ * - Colors (Hex & RGB for opacity handling)
+ * - Typography (Scoped font variables)
+ * - Shape (Border radius)
+ * - Visual Depth (Shadows & Borders)
+ * - Responsive Scaling (--cat-font-size, etc. for wide pixel fonts)
+ */
+
+/* ==========================================================================
+   BASE THEMES (Modern & Balanced)
+   ========================================================================== */
 
 :root[data-theme="light"] {
   --background: #ffffff;
   --background-rgb: 255, 255, 255;
-  --foreground: #1a1a1a;
-  --foreground-rgb: 26, 26, 26;
-  --primary: #1a1a1a;
-  --accent: #f5f5f5;
+  --foreground: #111111;
+  --foreground-rgb: 17, 17, 17;
+  --primary: #000000;
+  --accent: #f0f0f0;
   --font-main: var(--font-lora), serif;
   --radius: 1rem;
-  --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-  --border: 1px solid #e5e7eb;
+  --border: 1px solid #e5e5e5;
+  --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  /* Scaling */
+  --cat-font-size: 1.125rem;
+  --title-font-size: 1.5rem;
+  --hero-font-size: clamp(2.5rem, 8vw, 4rem);
 }
 
 :root[data-theme="dark"] {
@@ -21,85 +45,16 @@
   --background-rgb: 10, 10, 10;
   --foreground: #ededed;
   --foreground-rgb: 237, 237, 237;
-  --primary: #ededed;
+  --primary: #ffffff;
   --accent: #1a1a1a;
-  --font-main: var(--font-lora), serif;
-  --radius: 1rem;
-  --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.5);
-  --border: 1px solid #262626;
-}
-
-:root[data-theme="cyberpunk"] {
-  --background: #000000;
-  --background-rgb: 0, 0, 0;
-  --foreground: #f3f303;
-  --foreground-rgb: 243, 243, 3;
-  --primary: #f3f303;
-  --accent: #ff00ff;
-  --font-main: var(--font-orbitron), sans-serif;
-  --radius: 0;
-  --shadow: 5px 5px 0px #ff00ff;
-  --border: 2px solid #f3f303;
-  background-image: radial-gradient(circle at 50% 50%, #1a1100 0%, #000000 100%);
-  text-transform: uppercase;
-}
-
-:root[data-theme="matrix"] {
-  --background: #000000;
-  --background-rgb: 0, 0, 0;
-  --foreground: #00ff41;
-  --foreground-rgb: 0, 255, 65;
-  --primary: #00ff41;
-  --accent: #003b00;
-  --font-main: var(--font-vt323), monospace;
-  --radius: 0;
-  --shadow: 0 0 5px #00ff41;
-  --border: 1px solid #00ff41;
-  background-image:
-    linear-gradient(rgba(0, 255, 65, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 255, 65, 0.05) 1px, transparent 1px);
-  background-size: 24px 24px;
-}
-
-:root[data-theme="gameboy"] {
-  --background: #9bbc0f;
-  --background-rgb: 155, 188, 15;
-  --foreground: #0f380f;
-  --foreground-rgb: 15, 56, 15;
-  --primary: #0f380f;
-  --accent: #8bac0f;
-  --font-main: var(--font-press-start), cursive;
-  --radius: 0;
-  --shadow: 4px 4px 0px #0f380f;
-  --border: 4px solid #0f380f;
-  background-image: linear-gradient(rgba(15, 56, 15, 0.05) 2px, transparent 2px);
-  background-size: 100% 4px;
-}
-
-:root[data-theme="retro"] {
-  --background: #1a0f00;
-  --background-rgb: 26, 15, 0;
-  --foreground: #ffb000;
-  --foreground-rgb: 255, 176, 0;
-  --primary: #ffb000;
-  --accent: #331a00;
-  --font-main: var(--font-space-mono), monospace;
-  --radius: 0;
-  --border: 2px solid #ffb000;
-  --shadow: 0 0 15px rgba(255, 176, 0, 0.4);
-}
-
-:root[data-theme="arch"] {
-  --background: #17191e;
-  --background-rgb: 23, 25, 30;
-  --foreground: #c5c8c6;
-  --foreground-rgb: 197, 200, 198;
-  --primary: #1793d1;
-  --accent: #1d1f21;
   --font-main: var(--font-geist-mono), monospace;
-  --radius: 0;
-  --border: 1px solid #373b41;
-  --shadow: none;
+  --radius: 1rem;
+  --border: 1px solid #262626;
+  --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+  /* Scaling */
+  --cat-font-size: 1.125rem;
+  --title-font-size: 1.5rem;
+  --hero-font-size: clamp(2.5rem, 8vw, 4rem);
 }
 
 :root[data-theme="dracula"] {
@@ -113,7 +68,207 @@
   --radius: 0.75rem;
   --border: 1px solid #44475a;
   --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+  /* Scaling */
+  --cat-font-size: 1.125rem;
+  --title-font-size: 1.5rem;
+  --hero-font-size: clamp(2.5rem, 8vw, 4rem);
 }
+
+/* ==========================================================================
+   TECH & HACKER THEMES (Hard-edged & High-contrast)
+   ========================================================================== */
+
+:root[data-theme="matrix"] {
+  --background: #000000;
+  --background-rgb: 0, 0, 0;
+  --foreground: #00ff41;
+  --foreground-rgb: 0, 255, 65;
+  --primary: #00ff41;
+  --accent: #003b00;
+  --font-main: var(--font-vt323), monospace;
+  --radius: 0;
+  --border: 1px solid #00ff41;
+  --shadow: 0 0 15px rgba(0, 255, 65, 0.2);
+  /* Scaling */
+  --cat-font-size: 1.25rem;
+  --title-font-size: 1.75rem;
+  --hero-font-size: clamp(2.5rem, 8vw, 4.5rem);
+  background-image:
+    linear-gradient(rgba(0, 255, 65, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 65, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+:root[data-theme="cyberpunk"] {
+  --background: #000000;
+  --background-rgb: 0, 0, 0;
+  --foreground: #f3f303;
+  --foreground-rgb: 243, 243, 3;
+  --primary: #f3f303;
+  --accent: #ff003c;
+  --font-main: var(--font-orbitron), sans-serif;
+  --radius: 0;
+  --border: 2px solid #f3f303;
+  --shadow: 0 0 20px rgba(243, 243, 3, 0.3);
+  /* Scaling */
+  --cat-font-size: 1rem;
+  --title-font-size: 1.5rem;
+  --hero-font-size: clamp(2.5rem, 8vw, 4rem);
+  background-image: radial-gradient(circle at 50% 50%, #f3f30311 0%, transparent 70%);
+  background-size: 100% 100%;
+}
+
+:root[data-theme="terminal"] {
+  --background: #050505;
+  --background-rgb: 5, 5, 5;
+  --foreground: #ffb000;
+  --foreground-rgb: 255, 176, 0;
+  --primary: #ffb000;
+  --accent: #111111;
+  --font-main: var(--font-vt323), monospace;
+  --radius: 0;
+  --border: 1px solid #ffb000;
+  --shadow: 0 0 12px rgba(255, 176, 0, 0.4);
+  /* Scaling */
+  --cat-font-size: 1.25rem;
+  --title-font-size: 1.75rem;
+  --hero-font-size: clamp(2rem, 8vw, 4rem);
+  background-image:
+    repeating-linear-gradient(0deg, rgba(255, 176, 0, 0.03) 0px, rgba(255, 176, 0, 0.03) 1px, transparent 1px, transparent 2px),
+    linear-gradient(to bottom, rgba(5, 5, 5, 0) 0%, rgba(5, 5, 5, 0.1) 50%, rgba(5, 5, 5, 0) 100%);
+  background-size: 100% 2px, 100% 100%;
+}
+
+:root[data-theme="kali"] {
+  --background: #0f1216;
+  --background-rgb: 15, 18, 22;
+  --foreground: #ffffff;
+  --foreground-rgb: 255, 255, 255;
+  --primary: #2facff;
+  --accent: #555555;
+  --font-main: var(--font-geist-mono), monospace;
+  --radius: 0;
+  --border: 1px solid #2facff;
+  --shadow: 0 0 10px rgba(47, 172, 255, 0.3);
+  /* Scaling */
+  --cat-font-size: 1.125rem;
+  --title-font-size: 1.5rem;
+  --hero-font-size: clamp(2.5rem, 8vw, 4rem);
+  background-image: radial-gradient(circle at 2px 2px, #2facff11 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+/* ==========================================================================
+   RETRO PIXEL THEMES (8-bit Visuals & Smart Font Scaling)
+   ========================================================================== */
+
+:root[data-theme="gameboy"] {
+  --background: #9bbc0f;
+  --background-rgb: 155, 188, 15;
+  --foreground: #0f380f;
+  --foreground-rgb: 15, 56, 15;
+  --primary: #306230;
+  --accent: #8bac0f;
+  --font-main: var(--font-press-start), cursive;
+  --radius: 0;
+  --border: 2px solid #0f380f;
+  --shadow: 4px 4px 0px rgba(15, 56, 15, 0.2);
+  /* Scaling (Crucial for wide pixel font) */
+  --cat-font-size: 0.75rem;
+  --title-font-size: 1rem;
+  --hero-font-size: clamp(1.25rem, 5vw, 2.5rem);
+  background-image: repeating-linear-gradient(0deg, rgba(15, 56, 15, 0.05) 0px, rgba(15, 56, 15, 0.05) 1px, transparent 1px, transparent 2px);
+  background-size: 100% 2px;
+}
+
+:root[data-theme="mario"] {
+  --background: #5c94fc;
+  --background-rgb: 92, 148, 252;
+  --foreground: #ffffff;
+  --foreground-rgb: 255, 255, 255;
+  --primary: #ff0000;
+  --accent: #f8b800;
+  --font-main: var(--font-press-start), cursive;
+  --radius: 0;
+  --border: 4px solid #000000;
+  --shadow: 4px 4px 0px #000000;
+  /* Scaling */
+  --cat-font-size: 0.75rem;
+  --title-font-size: 1rem;
+  --hero-font-size: clamp(1.25rem, 5vw, 2.5rem);
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.4) 2px, transparent 2px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.4) 2px, transparent 2px);
+  background-size: 40px 40px;
+}
+
+/* ==========================================================================
+   CREATIVE & ARTISTIC THEMES (Specific Textures & Styles)
+   ========================================================================== */
+
+:root[data-theme="sketch"] {
+  --background: #fdfbf7;
+  --background-rgb: 253, 251, 247;
+  --foreground: #2d3436;
+  --foreground-rgb: 45, 52, 54;
+  --primary: #0984e3;
+  --accent: #d63031;
+  --font-main: var(--font-sketch), cursive;
+  --radius: 0.25rem;
+  --border: 2px solid #2d3436;
+  --shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  /* Scaling */
+  --cat-font-size: 1.125rem;
+  --title-font-size: 1.5rem;
+  --hero-font-size: clamp(2.5rem, 8vw, 4rem);
+  background-image:
+    linear-gradient(#e5e5e5 1px, transparent 1px),
+    linear-gradient(90deg, #e5e5e5 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+
+:root[data-theme="linkinpark"] {
+  --background: #111111;
+  --background-rgb: 17, 17, 17;
+  --foreground: #eeeeee;
+  --foreground-rgb: 238, 238, 238;
+  --primary: #e01e37;
+  --accent: #444444;
+  --font-main: var(--font-lp), sans-serif;
+  --radius: 0;
+  --border: 2px solid #e01e37;
+  --shadow: 8px 8px 0px rgba(224, 30, 55, 0.2);
+  /* Scaling */
+  --cat-font-size: 1.25rem;
+  --title-font-size: 1.75rem;
+  --hero-font-size: clamp(2.5rem, 8vw, 4.5rem);
+  background-color: #111;
+  background-image: repeating-linear-gradient(45deg, #000 0, #000 1px, transparent 0, transparent 50%);
+  background-size: 10px 10px;
+}
+
+:root[data-theme="adele"] {
+  --background: #000000;
+  --background-rgb: 0, 0, 0;
+  --foreground: #ffffff;
+  --foreground-rgb: 255, 255, 255;
+  --primary: #ffffff;
+  --accent: #333333;
+  --font-main: var(--font-adele), serif;
+  --radius: 0;
+  --border: 1px solid #333333;
+  --shadow: none;
+  /* Scaling */
+  --cat-font-size: 1.125rem;
+  --title-font-size: 1.65rem;
+  --hero-font-size: clamp(2.5rem, 8vw, 4.5rem);
+  background-color: #000000;
+  background-image: radial-gradient(circle at 50% 50%, rgba(20, 20, 20, 1) 0%, rgba(0, 0, 0, 1) 100%);
+}
+
+/* ==========================================================================
+   GLOBAL STYLE OVERWRITES
+   ========================================================================== */
 
 body {
   background: var(--background);
@@ -122,4 +277,12 @@ body {
   transition: background 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   min-height: 100vh;
   background-attachment: fixed;
+}
+
+/* Mantine color correction for better contrast in themed environments */
+.mantine-Modal-content,
+.mantine-Popover-dropdown {
+  background-color: var(--background) !important;
+  border: var(--border) !important;
+  color: var(--foreground) !important;
 }

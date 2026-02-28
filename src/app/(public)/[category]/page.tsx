@@ -60,18 +60,26 @@ export default async function CategoryPage({ params, searchParams }: PageProps) 
   const label = CATEGORY_LABELS[category]
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-12">
+    <div className="max-w-5xl mx-auto px-4 pt-4 md:pt-12 pb-12">
       <Link
         href="/"
-        className="inline-flex items-center text-sm text-gray-500 hover:text-gray-900 transition-colors mb-8"
+        className="inline-flex items-center text-sm transition-colors mb-8 opacity-60 hover:opacity-100"
+        style={{ color: 'var(--foreground)', fontFamily: 'var(--font-main)' }}
       >
         <span className="mr-2">←</span> Back to Home
       </Link>
 
       {/* Header */}
       <header className="mb-12">
-        <h1 className="text-4xl font-bold text-gray-900 tracking-tight">{label}</h1>
-        <p className="mt-2 text-gray-500">{total} post{total !== 1 ? "s" : ""}</p>
+        <h1
+          className="text-4xl md:text-5xl font-black tracking-tight"
+          style={{ color: 'var(--foreground)', fontFamily: 'var(--font-main)', textShadow: 'var(--shadow)' }}
+        >
+          {label}
+        </h1>
+        <p className="mt-2 opacity-60" style={{ color: 'var(--foreground)', fontFamily: 'var(--font-main)' }}>
+          {total} post{total !== 1 ? "s" : ""}
+        </p>
       </header>
 
       {/* Posts grid */}
@@ -102,8 +110,8 @@ export default async function CategoryPage({ params, searchParams }: PageProps) 
               key={p}
               href={`/${segment}?page=${p}`}
               className={`px-3 py-1.5 text-sm rounded-md transition-colors ${p === page
-                  ? "bg-gray-900 text-white"
-                  : "text-gray-600 hover:bg-gray-100"
+                ? "bg-gray-900 text-white"
+                : "text-gray-600 hover:bg-gray-100"
                 }`}
             >
               {p}

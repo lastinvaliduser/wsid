@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { Lora, Geist_Mono, Orbitron, Space_Mono, Press_Start_2P, VT323 } from "next/font/google"
+import { Lora, Geist_Mono, Orbitron, Space_Mono, Press_Start_2P, VT323, Architects_Daughter, Staatliches, Playfair_Display } from "next/font/google"
 import { ColorSchemeScript, MantineProvider, createTheme } from "@mantine/core"
 import { Notifications } from "@mantine/notifications"
 import { SpotlightSearch } from "@/components/public/SpotlightSearch"
@@ -10,12 +10,28 @@ import "@mantine/notifications/styles.css"
 import "@mantine/tiptap/styles.css"
 import "./globals.css"
 
+/**
+ * FONT INITIALIZATION
+ * --------------------------------------------------------------------------
+ * We use Next.js font optimization for all theme-specific fonts.
+ * Each font is assigned a CSS variable for unified access in globals.css.
+ */
 const lora = Lora({ variable: "--font-lora", subsets: ["latin"] })
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] })
 const orbitron = Orbitron({ variable: "--font-orbitron", subsets: ["latin"], weight: ["400", "700"] })
 const spaceMono = Space_Mono({ variable: "--font-space-mono", subsets: ["latin"], weight: ["400", "700"] })
 const pressStart2P = Press_Start_2P({ variable: "--font-press-start", subsets: ["latin"], weight: ["400"] })
 const vt323 = VT323({ variable: "--font-vt323", subsets: ["latin"], weight: ["400"] })
+const architectsDaughter = Architects_Daughter({ variable: "--font-sketch", subsets: ["latin"], weight: ["400"] })
+const staatliches = Staatliches({ variable: "--font-lp", subsets: ["latin"], weight: ["400"] })
+const playfair = Playfair_Display({ variable: "--font-adele", subsets: ["latin"], weight: ["400", "700"] })
+
+// Combines all font variables into a single class string for the <html> tag
+const fontVariables = [
+  lora.variable, geistMono.variable, orbitron.variable,
+  spaceMono.variable, pressStart2P.variable, vt323.variable,
+  architectsDaughter.variable, staatliches.variable, playfair.variable
+].join(" ")
 
 const theme = createTheme({
   fontFamily: 'var(--font-main)',
@@ -52,7 +68,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${lora.variable} ${geistMono.variable} ${orbitron.variable} ${spaceMono.variable} ${pressStart2P.variable} ${vt323.variable}`}
+      className={fontVariables}
     >
       <head>
         <ColorSchemeScript />
@@ -63,7 +79,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Notifications />
             <SiteSidebar />
             <SpotlightSearch />
-            <main className="min-h-screen pt-16 md:pt-0">
+            <main className="min-h-screen pt-0">
               {children}
             </main>
           </MantineProvider>

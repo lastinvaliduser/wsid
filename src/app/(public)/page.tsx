@@ -46,10 +46,19 @@ export default async function LandingPage() {
   return (
     <>
       {/* Hero */}
-      <section className="max-w-5xl mx-auto px-4 pt-12 pb-8 text-center">
+      <section className="max-w-5xl mx-auto px-4 pt-6 md:pt-12 pb-8 text-center">
         <h1
-          className="text-5xl md:text-6xl font-black leading-tight tracking-tight mb-4"
-          style={{ color: 'var(--foreground)', fontFamily: 'var(--font-main)', textShadow: 'var(--shadow)' }}
+          className="font-black leading-tight tracking-tight mb-4"
+          style={{
+            color: 'var(--foreground)',
+            fontFamily: 'var(--font-main)',
+            textShadow: 'var(--shadow)',
+            /* 
+               SCALING: --hero-font-size is adjusted per-theme in globals.css 
+               to prevent layout breakage with wide pixel fonts (Mario/GameBoy).
+            */
+            fontSize: 'var(--hero-font-size)'
+          }}
         >
           What Should I Do Now?
         </h1>
@@ -59,7 +68,7 @@ export default async function LandingPage() {
         >
           Press <kbd className="px-1.5 py-0.5 rounded border" style={{ border: "var(--border)", backgroundColor: "var(--background)" }}>Cmd</kbd> + <kbd className="px-1.5 py-0.5 rounded border" style={{ border: "var(--border)", backgroundColor: "var(--background)" }}>Shift</kbd> + <kbd className="px-1.5 py-0.5 rounded border" style={{ border: "var(--border)", backgroundColor: "var(--background)" }}>F</kbd> to search
         </p>
-        <p className="mt-4 text-lg text-gray-500 max-w-xl mx-auto">
+        <p className="mt-4 text-lg opacity-70 max-w-xl mx-auto" style={{ color: 'var(--foreground)', fontFamily: 'var(--font-main)' }}>
           Thoughts, stories, and learnings from life — coding, music, photography, and riding.
         </p>
       </section>
@@ -91,8 +100,13 @@ export default async function LandingPage() {
                 />
 
                 <h3
-                  className="relative z-10 font-black text-lg sm:text-xl tracking-widest uppercase transition-colors"
-                  style={{ color: 'var(--foreground)', textShadow: 'var(--shadow)' }}
+                  className="relative z-10 font-black tracking-widest uppercase transition-colors text-center"
+                  style={{
+                    color: 'var(--foreground)',
+                    textShadow: 'var(--shadow)',
+                    fontSize: 'var(--cat-font-size)',
+                    lineHeight: '1.2'
+                  }}
                 >
                   {CATEGORY_LABELS[cat]}
                 </h3>

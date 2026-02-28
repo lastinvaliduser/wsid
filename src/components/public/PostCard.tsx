@@ -76,9 +76,14 @@ export function PostCard({
       </div>
       <Link href={href} className="block group/link">
         <h2
-          className={`font-bold text-gray-900 dark:text-gray-100 transition-colors ${compact ? "text-sm" : "text-lg"
-            }`}
-          style={{ fontFamily: 'var(--font-main)', color: 'var(--foreground)' }}
+          className="font-black mb-3 leading-tight transition-colors group-hover:text-primary"
+          style={{
+            color: 'var(--foreground)',
+            fontFamily: 'var(--font-main)',
+            textShadow: 'var(--shadow)',
+            /* SCALING: Controlled per-theme to prevent overflow in bulky fonts */
+            fontSize: 'var(--title-font-size)'
+          }}
         >
           {title}
         </h2>
