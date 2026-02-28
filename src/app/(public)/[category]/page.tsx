@@ -25,6 +25,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 }
 
+import Link from "next/link"
+
 export default async function CategoryPage({ params, searchParams }: PageProps) {
   const { category: segment } = await params
   const { page: pageParam } = await searchParams
@@ -59,6 +61,13 @@ export default async function CategoryPage({ params, searchParams }: PageProps) 
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-12">
+      <Link
+        href="/"
+        className="inline-flex items-center text-sm text-gray-500 hover:text-gray-900 transition-colors mb-8"
+      >
+        <span className="mr-2">←</span> Back to Home
+      </Link>
+
       {/* Header */}
       <header className="mb-12">
         <h1 className="text-4xl font-bold text-gray-900 tracking-tight">{label}</h1>
@@ -92,11 +101,10 @@ export default async function CategoryPage({ params, searchParams }: PageProps) 
             <a
               key={p}
               href={`/${segment}?page=${p}`}
-              className={`px-3 py-1.5 text-sm rounded-md transition-colors ${
-                p === page
+              className={`px-3 py-1.5 text-sm rounded-md transition-colors ${p === page
                   ? "bg-gray-900 text-white"
                   : "text-gray-600 hover:bg-gray-100"
-              }`}
+                }`}
             >
               {p}
             </a>

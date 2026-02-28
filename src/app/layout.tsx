@@ -12,8 +12,8 @@ const lora = Lora({ variable: "--font-lora", subsets: ["latin"] })
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] })
 
 const theme = createTheme({
-  fontFamily: 'var(--font-lora), serif',
-  headings: { fontFamily: 'var(--font-lora), serif' },
+  fontFamily: `${lora.style.fontFamily}, serif`,
+  headings: { fontFamily: `${lora.style.fontFamily}, serif` },
   primaryColor: 'gray',
 })
 
@@ -47,7 +47,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <ColorSchemeScript defaultColorScheme="light" />
       </head>
-      <body className={`${lora.variable} ${geistMono.variable} antialiased font-sans`}>
+      <body className={`${lora.className} ${geistMono.variable} antialiased`}>
         <MantineProvider theme={theme} defaultColorScheme="light">
           <Notifications position="top-right" />
           <SpotlightSearch />

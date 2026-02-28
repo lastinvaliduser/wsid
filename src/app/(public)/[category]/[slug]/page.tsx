@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation"
 import Image from "next/image"
+import Link from "next/link"
 import type { Metadata } from "next"
 import { prisma } from "@/lib/prisma"
 import { urlSegmentToCategory, CATEGORY_LABELS, categoryToUrlSegment } from "@/lib/category"
@@ -73,10 +74,10 @@ export default async function PostPage({ params }: PageProps) {
 
   const formattedDate = post.publishedAt
     ? new Date(post.publishedAt).toLocaleDateString("en-US", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      })
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    })
     : null
 
   // JSON-LD structured data
@@ -109,6 +110,13 @@ export default async function PostPage({ params }: PageProps) {
       <ScrollProgress />
 
       <article className="max-w-2xl mx-auto px-4 py-12">
+        <Link
+          href="/"
+          className="inline-flex items-center text-sm text-gray-500 hover:text-gray-900 transition-colors mb-8"
+        >
+          <span className="mr-2">←</span> Back to Home
+        </Link>
+
         {/* Post header */}
         <header className="mb-8">
           <div className="flex items-center gap-2 mb-4">
