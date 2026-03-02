@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, Suspense } from "react"
 import { signIn } from "next-auth/react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { TextInput, PasswordInput, Button, Paper, Title, Text, Alert } from "@mantine/core"
@@ -11,7 +11,7 @@ interface LoginForm {
   password: string
 }
 
-export default function AdminLoginPage() {
+function LoginContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const callbackUrl = searchParams.get("callbackUrl") ?? "/admin"
@@ -87,5 +87,13 @@ export default function AdminLoginPage() {
         </form>
       </Paper>
     </div>
+  )
+}
+
+export default function AdminLoginPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">Loading...</div>}>
+      <LoginContent />
+    </Suspense>
   )
 }
