@@ -1,7 +1,7 @@
 "use client"
 
 import { Modal, Text, Title, Stack, Group, Anchor } from "@mantine/core"
-import { IconMail, IconArrowRight } from "@tabler/icons-react"
+import { IconMail } from "@tabler/icons-react"
 
 interface AboutModalProps {
     opened: boolean
@@ -35,7 +35,7 @@ export function AboutModal({ opened, onClose }: AboutModalProps) {
         >
             <Stack gap="md">
                 <Text size="sm" c="dimmed">
-                    "What Should I Do Now?" (wsid.now) is a personal space where I document my journey through technology, music, and the open road.
+                    &quot;What Should I Do Now?&quot; (wsid.now) is a personal space where I document my journey through technology, music, and the open road.
                 </Text>
 
                 <section>

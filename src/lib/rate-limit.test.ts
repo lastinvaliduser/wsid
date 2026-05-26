@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach, vi } from "vitest"
+import { describe, it, expect } from "vitest"
 import { checkRateLimit, getClientIp } from "./rate-limit"
 
 // Reset the module's store between tests by re-importing with a fresh module

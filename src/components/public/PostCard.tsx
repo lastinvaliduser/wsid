@@ -73,6 +73,7 @@ export function PostCard({
         {formattedDate && (
           <span className="text-[10px] opacity-60 font-mono" style={{ color: "var(--foreground)", fontFamily: "var(--font-main)" }}>{formattedDate}</span>
         )}
+        <span className="text-[10px] opacity-60 font-mono" style={{ color: "var(--foreground)", fontFamily: "var(--font-main)" }}>• {readingTimeMinutes} min read</span>
       </div>
       <Link href={href} className="block group/link">
         <h2

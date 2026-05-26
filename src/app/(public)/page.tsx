@@ -10,28 +10,21 @@ export const revalidate = 3600
 
 
 export default async function LandingPage() {
-  const [categoryCounts, recentPosts] = await Promise.all([
-    prisma.post.groupBy({
-      by: ["category"],
-      where: { status: "PUBLISHED" },
-      _count: { _all: true },
-    }),
-    prisma.post.findMany({
-      where: { status: "PUBLISHED" },
-      orderBy: { publishedAt: "desc" },
-      take: 6,
-      select: {
-        id: true,
-        title: true,
-        slug: true,
-        category: true,
-        excerpt: true,
-        coverImage: true,
-        publishedAt: true,
-        content: true,
-      },
-    }),
-  ])
+  const recentPosts = await prisma.post.findMany({
+    where: { status: "PUBLISHED" },
+    orderBy: { publishedAt: "desc" },
+    take: 6,
+    select: {
+      id: true,
+      title: true,
+      slug: true,
+      category: true,
+      excerpt: true,
+      coverImage: true,
+      publishedAt: true,
+      content: true,
+    },
+  })
 
 
   const categories: Category[] = ["CODING", "GUITAR", "PHOTOGRAPHY", "MOTORBIKES"]

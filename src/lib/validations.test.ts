@@ -56,7 +56,11 @@ describe("CreatePostSchema", () => {
   })
 
   it("defaults status to DRAFT when omitted", () => {
-    const { status: _, ...withoutStatus } = validPost
+    const withoutStatus = {
+      title: validPost.title,
+      category: validPost.category,
+      content: validPost.content,
+    }
     const result = CreatePostSchema.parse(withoutStatus)
     expect(result.status).toBe("DRAFT")
   })

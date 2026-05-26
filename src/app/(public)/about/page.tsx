@@ -1,6 +1,4 @@
-import Image from "next/image"
 import type { Metadata } from "next"
-import { prisma } from "@/lib/prisma"
 import type { Category } from "@prisma/client"
 
 export const metadata: Metadata = {

@@ -42,18 +42,20 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
      * Runs once on mount to handle persistence and legacy theme names.
      */
     useEffect(() => {
-        let savedTheme = localStorage.getItem("app-theme")
+        const initializeTheme = () => {
+            let savedTheme = localStorage.getItem("app-theme")
 
-        // Handle theme renames from previous versions
-        if (savedTheme === "retro") savedTheme = "terminal"
-        if (savedTheme === "arch") savedTheme = "adele"
+            // Handle theme renames from previous versions
+            if (savedTheme === "retro") savedTheme = "terminal"
+            if (savedTheme === "arch") savedTheme = "adele"
 
-        if (savedTheme && VALID_THEMES.includes(savedTheme as ThemeName)) {
-            setThemeState(savedTheme as ThemeName)
+            if (savedTheme && VALID_THEMES.includes(savedTheme as ThemeName)) {
+                setThemeState(savedTheme as ThemeName)
+            }
+            setMounted(true)
         }
 
-        // Hydration guard: prevent server/client mismatch during initialization
-        setMounted(true)
+        initializeTheme()
     }, [])
 
     /**

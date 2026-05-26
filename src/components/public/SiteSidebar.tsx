@@ -1,14 +1,14 @@
 "use client"
 
 import { useState } from "react"
-import { Tooltip, UnstyledButton, Stack, rem, Group, ColorSwatch, Text, Popover } from "@mantine/core"
+import { Tooltip, UnstyledButton, Stack, rem, ColorSwatch, Text, Popover } from "@mantine/core"
 import {
     IconHome2, IconSearch, IconInfoCircle, IconPalette, IconDeviceLaptop,
     IconCode, IconBinary, IconTerminal, IconCpu, IconActivity,
     IconLayersIntersect, IconWaveSawTool, IconDeviceGamepad2, IconTrophy,
     IconCoin, IconGhost, IconShieldSearch, IconCommand, IconSettings,
     IconWriting, IconBrush, IconColorPicker, IconNotebook, IconMicrophone2,
-    IconMusic, IconDisc, IconBolt, IconTerminal2, IconHeart
+    IconMusic, IconDisc, IconBolt, IconTerminal2
 } from "@tabler/icons-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -69,7 +69,7 @@ const getThemeIcons = (theme: ThemeName) => {
  * A unified link/button for the sidebar with tooltip support.
  */
 interface SidebarLinkProps {
-    icon: any
+    icon: React.ElementType
     label: string
     active?: boolean
     onClick?(): void

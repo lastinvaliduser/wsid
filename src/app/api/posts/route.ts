@@ -6,8 +6,16 @@ import { Prisma } from "@prisma/client"
 import { CreatePostSchema, PostQuerySchema } from "@/lib/validations"
 import { generateSlug, appendSuffix } from "@/lib/slug"
 import { categoryToUrlSegment } from "@/lib/category"
+import { checkRateLimit, API_RATE_LIMIT, getClientIp } from "@/lib/rate-limit"
 
 export async function GET(request: Request) {
+  // Rate limiting
+  const ip = getClientIp(request)
+  const { allowed } = checkRateLimit(`api:posts:get:${ip}`, API_RATE_LIMIT)
+  if (!allowed) {
+    return NextResponse.json({ error: "Too many requests" }, { status: 429 })
+  }
+
   const { searchParams } = new URL(request.url)
   const queryResult = PostQuerySchema.safeParse(Object.fromEntries(searchParams))
 
@@ -68,6 +76,13 @@ export async function GET(request: Request) {
 }
 
 export async function POST(request: Request) {
+  // Rate limiting
+  const ip = getClientIp(request)
+  const { allowed } = checkRateLimit(`api:posts:post:${ip}`, API_RATE_LIMIT)
+  if (!allowed) {
+    return NextResponse.json({ error: "Too many requests" }, { status: 429 })
+  }
+
   const session = await auth()
   if (!session) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
